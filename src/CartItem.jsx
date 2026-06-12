@@ -6,20 +6,22 @@ export default function CartItem({ onContinueShopping }) {
   const cartItems = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Computes grand overall total dollar amount
+  // Computes grand overall total dollar amount for checkout verification
   const calculateTotalAmount = () => {
     return cartItems.reduce((total, item) => total + (item.cost * item.quantity), 0);
   };
 
-  // Computes subtotal configuration per individual item line
+  // Computes subtotal configuration dynamically per individual item line
   const calculateTotalCost = (item) => {
     return item.cost * item.quantity;
   };
 
+  // Increases quantity of an item inside the store slice
   const handleIncrement = (item) => {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
+  // Decreases item quantity or wipes it out completely if it hits zero
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
@@ -28,6 +30,7 @@ export default function CartItem({ onContinueShopping }) {
     }
   };
 
+  // Completely deletes a plant node entry out of the cart state array
   const handleRemove = (name) => {
     dispatch(removeItem(name));
   };

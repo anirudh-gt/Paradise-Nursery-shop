@@ -12,7 +12,8 @@ export default function ProductList() {
 
   const totalCartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-  const plantsData = [
+  // Explicitly named plantsArray with 3 categories and 6 unique plants
+  const plantsArray = [
     {
       category: "Air Purifying Plants",
       plants: [
@@ -26,6 +27,13 @@ export default function ProductList() {
         { name: "Aloe Vera", cost: 18, image: "https://images.unsplash.com/photo-1596547610020-fbc3df7c7b8e?q=80&w=400" },
         { name: "Tulsi (Holy Basil)", cost: 10, image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400" }
       ]
+    },
+    {
+      category: "Aromatic Fragrant Plants",
+      plants: [
+        { name: "Lavender", cost: 22, image: "https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=400" },
+        { name: "Jasmine", cost: 20, image: "https://images.unsplash.com/photo-1508717272800-9fff97c54d7e?q=80&w=400" }
+      ]
     }
   ];
 
@@ -35,7 +43,6 @@ export default function ProductList() {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif' }}>
-      {/* Navigation Navbar */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#2e7d32', padding: '15px 30px', color: 'white', alignItems: 'center' }}>
         <h3 style={{ margin: 0, cursor: 'pointer' }} onClick={() => { setShowCart(false); setShowAbout(false); }}>Paradise Nursery</h3>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
@@ -47,14 +54,13 @@ export default function ProductList() {
         </div>
       </nav>
 
-      {/* Conditional Rendering Logic */}
       {showAbout ? (
         <AboutUs />
       ) : showCart ? (
         <CartItem onContinueShopping={() => setShowCart(false)} />
       ) : (
         <div style={{ padding: '30px' }}>
-          {plantsData.map((section, idx) => (
+          {plantsArray.map((section, idx) => (
             <div key={idx} style={{ marginBottom: '40px' }}>
               <h2 style={{ color: '#2e7d32', borderBottom: '2px solid #a5d6a7', paddingBottom: '10px' }}>{section.category}</h2>
               <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '20px' }}>
